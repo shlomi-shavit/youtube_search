@@ -23,6 +23,9 @@
         width: 150px;
         height: 100px;
         margin-right: 10px;
+        img{
+            height: 100%;
+        }
     }
     .song_content{
         border: solid 1px #bfbfbf;
@@ -48,6 +51,12 @@
         border-top: solid 1px grey;
         display: flex;
 
+        a {
+            width: 100%;
+            display: flex;
+            text-decoration: none;
+            color: #333;
+        }
         cursor: pointer;
         &:hover {
             background: #86c1c1;

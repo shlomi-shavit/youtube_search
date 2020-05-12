@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import classes from './searchComponent.module.scss';
 
 class SearchComponent extends Component {
 
-    constructor({ formConfiguration }) {
+    constructor() {
         super();
 
         this.state = {
@@ -22,13 +22,12 @@ class SearchComponent extends Component {
         if (value.length > 0) {
 
             const regex = new RegExp(`${value}`, `i`);
-            this.props.songs.map(song => {
+            this.props.songs.forEach(song => {
                 songs.push(song.name);
             });
 
             suggestions = songs.sort().filter(song => regex.test(song));
         }
-
 
         this.setState({
             suggestions: suggestions,
@@ -44,9 +43,21 @@ class SearchComponent extends Component {
         return (
             <ul>
                 {suggestions.map(song => {
+                    const songIndex = this.props.songs.findIndex(songIndex => songIndex.name === song);
+                    const songData = this.props.songs[songIndex];
+                    const songLink = songData.link;
+                    const songImg = () => {
+                        let imgPath;
+                        let url = songLink;
+                        let results;
+                        results = url.match("[\?&]v=([^&#]*)");
+                        imgPath = (results === null) ? url : results[1];
+                        return "http://img.youtube.com/vi/" + imgPath + "/0.jpg";
+                    }
+
                     return (
-                        <li key={song} onClick={() => this.suggestionSelected(song)}>
-                            <div className={classes.song_img}></div>
+                        <li key={song} onClick={() => this.suggestionSelected(song, songLink)}>
+                            <div className={classes.song_img}><img src={songImg()} /></div>
                             <div className={classes.song_content}>
                                 <div className={classes.song_title}>
                                     {song}
@@ -59,7 +70,8 @@ class SearchComponent extends Component {
         );
     }
 
-    suggestionSelected(value) {
+    suggestionSelected(value, link) {
+        window.location.href = link;
         this.setState({
             text: value,
             suggestions: []
@@ -70,7 +82,7 @@ class SearchComponent extends Component {
 
         const text = this.state.text;
         return (
-            <div className={classes.search_wrapper}>
+            <div className={classes.search_wrapper} >
                 <div className={classes.AutoCompleteText}>
                     <input type="text" onChange={this.onTextChanged} value={text} />
                     {this.renderSuggestions()}
