@@ -1,0 +1,57 @@
+.search_wrapper {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: left;
+    font-size: 12px;
+    display: flex;
+}
+
+.search_icon {
+    height: 15px;
+    padding: 10px;
+    border: solid 1px #bfbfbf;
+    background: #e8e8e8;
+}
+
+.AutoCompleteText {
+    border: solid 1px #bfbfbf;
+    width: 100%;
+
+    .song_img {
+        border: solid 1px #bfbfbf;
+        width: 150px;
+        height: 100px;
+        margin-right: 10px;
+    }
+    .song_content{
+        border: solid 1px #bfbfbf;
+        width: 100%;
+
+        .song_title{
+            border: solid 1px #bfbfbf;
+        }
+    }
+    input {
+        width: calc(100% - 10px);
+        border: none;
+        outline: none;
+        padding: 10px 5px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        padding: 5px;
+        border-top: solid 1px grey;
+        display: flex;
+
+        cursor: pointer;
+        &:hover {
+            background: #86c1c1;
+            color: #fff
+        }
+    }
+}
